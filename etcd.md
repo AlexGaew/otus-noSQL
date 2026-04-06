@@ -185,9 +185,9 @@ aleksandrgaev@MacBook-Pro-Aleksandr etcd % docker exec -e ETCDCTL_API=3 etcd2 /u
 hw/key
 v1
 ```
-Останавливаем лидера.
+### Останавливаем лидера.
 docker stop etcd1
-Проверяем, что на оставшихся 2 нодах есть quorum и запись работает:
+### Проверяем, что на оставшихся 2 нодах есть quorum и запись работает:
 ```bash
 docker exec -e ETCDCTL_API=3 etcd2 /usr/local/bin/etcdctl \
   --endpoints=http://etcd2:2379,http://etcd3:2379 \
@@ -219,8 +219,10 @@ docker exec -e ETCDCTL_API=3 etcd2 /usr/local/bin/etcdctl \
 
   v2-after-etcd1-down
   ```
-  Для демонстрации границы отказоустойчивости остановим еще одну ноду (etcd2):
+  ### Для демонстрации границы отказоустойчивости остановим еще одну ноду (etcd2):
+  
   docker stop etcd2
+  
 ```bash
 aleksandrgaev@MacBook-Pro-Aleksandr etcd % docker exec -e ETCDCTL_API=3 etcd3 /usr/local/bin/etcdctl \
   --endpoints=http://etcd3:2379 \
@@ -230,8 +232,10 @@ aleksandrgaev@MacBook-Pro-Aleksandr etcd % docker exec -e ETCDCTL_API=3 etcd3 /u
 
 Error: context deadline exceeded
 ```
-Восстанавливаем остановленные ноды
+### Восстанавливаем остановленные ноды
+
 docker start etcd1 etcd2
+
 ```bash
 aleksandrgaev@MacBook-Pro-Aleksandr etcd % docker exec -e ETCDCTL_API=3 etcd1 /usr/local/bin/etcdctl \
   --endpoints=http://etcd1:2379,http://etcd2:2379,http://etcd3:2379 \
@@ -241,7 +245,6 @@ http://etcd1:2379 is healthy: successfully committed proposal: took = 4.258375ms
 http://etcd3:2379 is healthy: successfully committed proposal: took = 4.136792ms
 ```
 ## 4. Результаты выполнения домашнего задания
-
 
 ### 4.1 Что было сделано
 - Развернут кластер `etcd` из 3 нод: `etcd1`, `etcd2`, `etcd3` (через `docker-compose`).
