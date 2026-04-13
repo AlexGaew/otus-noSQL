@@ -73,6 +73,7 @@ Neo4j — это графовая NoSQL БД, которая особенно э
 
 ## 3. Выполнение ДЗ
  Neo4j (Cypher): одна команда, сразу сущности + связи
+```C
 CREATE
   (joel:Director {name:'Joel Coen'}),
   (blood:Movie {title:'Blood Simple', year:1983}),
@@ -81,7 +82,7 @@ CREATE
   (frances)-[:PLAYED_IN {character:'Abby'}]->(blood),
   (ethan:Director {name:'Ethan Coen', born:1957}),
   (ethan)-[:CREATED]->(blood);
-
+```
 
 PostgreSQL: 
   ```sql
